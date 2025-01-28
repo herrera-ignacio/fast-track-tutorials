@@ -1,5 +1,8 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { createStripeCheckoutSessionUrl } from "@/app/_server/services/payment-service";
+
 const CHECKOUT_REDIRECT_URL = process.env.NEXT_PUBLIC_CHECKOUT_REDIRECT_URL;
 
 export const redirectToCheckoutSessionAction = async (
@@ -20,18 +23,5 @@ export const redirectToCheckoutSessionAction = async (
     checkoutUrl = `${CHECKOUT_REDIRECT_URL}?error=true&message=${(err as Error).message}`;
   }
 
-  return checkoutUrl;
-};
-
-// TIP: Use object instead of array of parameters
-// as it's more easy to maintain as they grow.
-// This function will likely accept more parameters and
-// I don't want to care about their order
-// or updating existing function calls
-const createStripeCheckoutSessionUrl = async ({
-  priceId,
-}: {
-  priceId: string;
-}) => {
-  return "/";
+  redirect(checkoutUrl);
 };

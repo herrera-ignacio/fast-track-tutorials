@@ -16,12 +16,14 @@
 6. Set `NEXT_PUBLIC_CHECKOUT_URL` in `.env.local` as we will using it in the next step.
 7. In `app/actions.tsx` create a function `redirectToCheckoutSessionAction` that will perform the redirect to the appropriate Stripe self-hosted URL.
 8. Go to Stripe Dashboard (or use the CLI) to create a product and get its price id. TIP: Use _test mode_ while testing!
-9. (TODO) In your `.env.local` set `NEXT_PUBLIC_PRODUCT_PRICE_ID` as we will use the price id client-side.
-10. (TODO) In your `.env.local`, set `STRIPE_API_KEY` as we will use it in the backend and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` as per docs. TIP: Use _test mode_ Stripe API key
-11. (TODO) Instatiate a Stripe client. I prefer encapsulating this into its own class.
-12. (TODO) Create a function `createStripeCheckoutSessionUrl` that will leverage the Stripe client and accept a `priceId` to create the checkout session URL. Use it to perform a redirect.
-13. (TODO) Create a `app/checkout/page.tsx` to handle the redirection status.
-14. (TODO) Test using [test cards to simulate a payment](https://docs.stripe.com/checkout/quickstart) and look for purchase on the Stripe dashboard.
+9. In your `.env.local` set `NEXT_PUBLIC_STRIPE_PRICE_ID` as we will use the price id client-side.
+10. In your `.env.local`, set `STRIPE_API_KEY` as we will use it in the backend and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` as per docs. TIP: Use _test mode_ Stripe API key
+11. Install server-only util `pnpm install server-only`.
+12. Instatiate a Stripe client in `app/_server/services/payment-service`. It can be either encapsulated in a class or a function.
+13. Create a function `createStripeCheckoutSessionUrl` that will leverage the Stripe client and accept a `priceId` to create the checkout session URL. Use it to perform a redirect.
+14. Create a `app/checkout/page.tsx` to handle the redirection status.
+15. Make the "Buy now" button call the server action.
+16. Test using [test cards to simulate a payment](https://docs.stripe.com/checkout/quickstart) and look for purchase on the Stripe dashboard.
 
 ### Next step: Webhooks and order fulfillment
 
