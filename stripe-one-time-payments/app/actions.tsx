@@ -1,6 +1,6 @@
 "use server";
 
-const CHECKOUT_URL = process.env.NEXT_PUBLIC_CHECKOUT_URL;
+const CHECKOUT_REDIRECT_URL = process.env.NEXT_PUBLIC_CHECKOUT_REDIRECT_URL;
 
 export const redirectToCheckoutSessionAction = async (
   // TIP: Use priceId as you can have support
@@ -17,7 +17,7 @@ export const redirectToCheckoutSessionAction = async (
     });
   } catch (err) {
     // checkoutUrl points to our app for an error message
-    checkoutUrl = `${CHECKOUT_URL}?error=true&message=${(err as Error).message}`;
+    checkoutUrl = `${CHECKOUT_REDIRECT_URL}?error=true&message=${(err as Error).message}`;
   }
 
   return checkoutUrl;
